@@ -1,0 +1,74 @@
+{% extends "predictor/base.html" %}
+
+{% block title %}Перевірити займ{% endblock %}
+
+{% block content %}
+  <section class="intro">
+    <h1>Оцініть шанси на схвалення займу</h1>
+    <p>Введіть дані заявника. Модель порівняє їх із 381 реальною заявкою й покаже, чи схвалили б такий займ.</p>
+  </section>
+
+  <div class="layout{% if result %} has-result{% endif %}">
+    <form method="post" class="panel">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="alert">{% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}</div>
+      {% endif %}
+
+      <fieldset>
+        <legend>Заявник</legend>
+        <div class="grid">
+          {% include "predictor/_field.html" with field=form.gender %}
+          {% include "predictor/_field.html" with field=form.married %}
+          {% include "predictor/_field.html" with field=form.dependents %}
+          {% include "predictor/_field.html" with field=form.education %}
+          {% include "predictor/_field.html" with field=form.self_employed %}
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Доходи</legend>
+        <div class="grid">
+          {% include "predictor/_field.html" with field=form.applicant_income %}
+          {% include "predictor/_field.html" with field=form.coapplicant_income %}
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Займ</legend>
+        <div class="grid">
+          {% include "predictor/_field.html" with field=form.loan_amount %}
+          {% include "predictor/_field.html" with field=form.loan_amount_term %}
+          {% include "predictor/_field.html" with field=form.credit_history %}
+          {% include "predictor/_field.html" with field=form.property_area %}
+        </div>
+      </fieldset>
+
+      <button type="submit" class="btn">Оцінити заявку</button>
+    </form>
+
+    <aside class="panel result-panel" aria-live="polite">
+      {% if result %}
+        <div class="verdict {% if result.approved %}ok{% else %}no{% endif %}">
+          <p class="verdict-title">{% if result.approved %}Схвалено{% else %}Відхилено{% endif %}</p>
+          <p>Імовірність схвалення: <strong>{{ result.probability|floatformat:0 }}%</strong></p>
+        </div>
+        <div class="meter"><span style="width: {{ result.probability|floatformat:0 }}%"></span></div>
+        <details>
+          <summary>Які дані отримала модель ({{ details.model_name }})</summary>
+          <dl class="data">
+            {% for name, value in details.inputs.items %}
+              <dt>{{ name }}</dt><dd>{{ value }}</dd>
+            {% endfor %}
+          </dl>
+        </details>
+        <p class="note">Це навчальний прогноз, а не рішення банку. Усі перевірки зберігаються в <a href="{% url 'history' %}">історії</a>.</p>
+      {% else %}
+        <h2>Результат</h2>
+        <p class="muted">Заповніть форму й натисніть «Оцінити заявку». Результат з'явиться тут.</p>
+        <h3>Що найбільше впливає</h3>
+        <p class="muted">У цих даних рішення залежить насамперед від кредитної історії. Решта ознак (дохід, сума, освіта) впливає значно слабше. Докладніше на сторінці <a href="{% url 'about' %}">«Як це працює»</a>.</p>
+      {% endif %}
+    </aside>
+  </div>
+{% endblock %}
