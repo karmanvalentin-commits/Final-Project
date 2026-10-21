@@ -103,4 +103,4 @@ loan-approval-prediction/
 
 ## Автор
 
-[Ваше ім'я] — [посилання на LinkedIn або пошта, за бажанням]
+[Karman Valentyn] — [diriienko333@gmail.com]
