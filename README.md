@@ -1,6 +1,6 @@
 # Прогноз схвалення займу (Loan Approval Prediction)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ValKar20/loan-approval-prediction/blob/main/loan_project.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/karmanvalentin-commits/Final-Project/blob/main/loan_project.ipynb)
 
 Фінальний проєкт курсу Python. За даними про клієнта (дохід, кредитна історія, сума займу тощо) модель передбачає, чи буде йому **схвалено займ**. Проєкт складається з двох частин: **Jupyter-ноутбука** (аналіз даних і навчання моделі) та **веб-застосунку на Django** (форма, прогноз, історія перевірок).
 
@@ -72,15 +72,15 @@
 
 **Ноутбук на своєму комп'ютері.**
 ```bash
-git clone https://github.com/ValKar20/loan-approval-prediction.git
-cd loan-approval-prediction
+git clone https://github.com/karmanvalentin-commits/Final-Project.git
+cd Final-Project
 pip3 install -r requirements.txt
 jupyter notebook loan_project.ipynb
 ```
 
 **Веб-застосунок (Mac / Linux).**
 ```bash
-cd loan-approval-prediction/webapp
+cd Final-Project/webapp
 bash run.sh
 ```
 Скрипт сам створить окреме середовище, встановить бібліотеки, навчить модель і запустить сайт. Після цього відкрийте http://127.0.0.1:8000/ (зупинити: Ctrl + C).
@@ -88,7 +88,7 @@ bash run.sh
 ## Структура репозиторію
 
 ```
-loan-approval-prediction/
+Final-Project/
 ├── loan_project.ipynb   # ноутбук: частина 1 (EDA) і частина 2 (моделювання)
 ├── loan_data.csv        # дані
 ├── images/              # графіки для README
@@ -103,4 +103,4 @@ loan-approval-prediction/
 
 ## Автор
 
-[Ваше ім'я] — [посилання на LinkedIn або пошта, за бажанням]
+[Valentyn Karman](https://github.com/karmanvalentin-commits)
